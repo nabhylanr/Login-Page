@@ -8,7 +8,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
-import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -23,7 +22,11 @@ import androidx.compose.ui.unit.dp
 import androidx. compose. ui. unit. sp
 import com.example.tugas7.ui.theme.Tugas7Theme
 import androidx. compose. material3.ButtonDefaults
-import androidx.compose.ui.res.colorResource
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +46,9 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun LoginScreen() {
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -62,22 +68,28 @@ fun LoginScreen() {
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        OutlinedTextField(value = "", onValueChange = {}, label = {
-            Text(text = "Email")
-        })
+        OutlinedTextField(
+            value = email,
+            onValueChange = { email = it },
+            label = { Text("Email") },
+        )
 
         Spacer(modifier = Modifier.height(4.dp))
 
-        OutlinedTextField(value = "", onValueChange = {}, label = {
-            Text(text = "Password")
-        })
+        OutlinedTextField(
+            value = password,
+            onValueChange = { password = it },
+            label = { Text("Password") },
+            visualTransformation = PasswordVisualTransformation()
+        )
 
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(onClick = {  },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFFBD51AE)
-            )) {
+            )
+        ) {
             Text(text = "Login")
         }
 
